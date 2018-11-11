@@ -32,6 +32,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
     this.resizeColumnStart = this.resizeColumnStart.bind(this)
     this.resizeColumnEnd = this.resizeColumnEnd.bind(this)
     this.resizeColumnMoving = this.resizeColumnMoving.bind(this)
+    this.getBodyHeight = this.getBodyHeight.bind(this)
 
     this.state = {
       page: props.defaultPage,
@@ -131,6 +132,21 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
       sortedData,
       currentlyResizing,
     } = resolvedState
+
+    // TODO: move somewhere
+    const { autoPageSize, rowHeight } = this.props
+    if (autoPageSize) {
+      const bodyHeight = this.getBodyHeight()
+
+      // if (this.isBodyHorizontalScrollShowing()) {
+      //   bodyHeight -= this.getScrollbarWidth()
+      // }
+
+      if (bodyHeight > 0) {
+        const newPageSize = Math.floor(bodyHeight / rowHeight)
+        this.onPageSizeChange(newPageSize)
+      }
+    }
 
     // Pagination
     const startRow = pageSize * page

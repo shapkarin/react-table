@@ -676,4 +676,21 @@ export default Base =>
         })
       }
     }
+
+    // taken from: http://stackoverflow.com/questions/1038727/how-to-get-browser-width-using-javascript-code
+    getBodyHeight () {
+      if (document.body) {
+        return document.body.clientHeight
+      }
+
+      if (window.innerHeight) {
+        return window.innerHeight
+      }
+
+      if (document.documentElement && document.documentElement.clientHeight) {
+        return document.documentElement.clientHeight
+      }
+
+      return -1
+    }
   }
