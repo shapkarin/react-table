@@ -136,6 +136,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
     // TODO: move somewhere
     const { autoPageSize, rowHeight } = this.props
     if (autoPageSize) {
+      // TODO: getParentHeight()
       const bodyHeight = this.getBodyHeight()
 
       // if (this.isBodyHorizontalScrollShowing()) {
@@ -144,6 +145,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
 
       if (bodyHeight > 0) {
         const newPageSize = Math.floor(bodyHeight / rowHeight)
+        // or use other way..
         this.onPageSizeChange(newPageSize)
       }
     }
